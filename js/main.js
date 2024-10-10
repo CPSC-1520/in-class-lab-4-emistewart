@@ -1,5 +1,48 @@
 
 // Enter your code below.
+(function (){
+  let newOrder = document.querySelector('#new-order-form');
+
+  newOrder.addEventListener('submit', (evt) => {
+   evt.preventDefault();
+
+   let orderName = evt.target.elements['order-item-name'];
+   let orderPrice = evt.target.elements['order-item-price'];
+   let orderItemSize = evt.target.elements['order-size'];
+
+   let nameValue = orderName.value;
+   let priceValue = parseFloat(orderPrice.value);
+   let sizeValue = orderItemSize.value;
+
+   let isValidForm = true;
+
+   if (isValueNotEmpty(nameValue) === false){
+     orderName.classList.add('is-invalid');
+     isValidForm = false;
+   } else {
+     orderName.classList.remove('is-invalid');
+   }
+
+   if (isGreaterThanFive(priceValue) === false){
+     orderPrice.classList.add('is-invalid');
+     isValidForm = false;
+   } else {
+     orderPrice.classList.remove('is-invalid')
+   }
+
+  if (isValueNotEmpty(sizeValue) === false){
+    orderItemSize.classList.add('is-invalid');
+    isValidForm = false;
+  } else {
+    orderItemSize.classList.remove('is-invalid');
+  }
+ 
+  if (isValidForm) {
+    addOrderItem(nameValue, priceValue, sizeValue);
+
+    budgetFormElement.reset();
+  }
+});
 
 
 // functions needed for assessment (do not change.)
@@ -49,3 +92,5 @@ const addOrderItem = (orderItemName, orderItemPrice, orderSize) => {
   </li>`
   orderItemList.innerHTML += newOrderItem
 }
+
+})();
